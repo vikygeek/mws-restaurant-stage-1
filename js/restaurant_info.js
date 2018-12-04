@@ -160,22 +160,34 @@ createReviewHTML = (review) => {
   article.setAttribute('aria-label','review by '+review.name);
   li.append(article);
 
+  const reviewDiv = document.createElement('div');
+  reviewDiv.className = 'review-title';
+  article.appendChild(reviewDiv);
+
   const name = document.createElement('p');
   name.innerHTML = review.name;
+  name.className = 'reviewer';
   article.setAttribute('aria-label','reviewer');
-  article.appendChild(name);
+  reviewDiv.appendChild(name);
 
   const date = document.createElement('p');
   date.innerHTML = review.date;
+  date.className = 'reviewDate';
   date.setAttribute('aria-label','review date');
-  article.appendChild(date);
+  reviewDiv.appendChild(date);
+
+  const ratingDiv = document.createElement('div');
+  ratingDiv.className = 'rating';
+  article.appendChild(ratingDiv);
 
   const rating = document.createElement('p');
+  rating.className = 'ratings';
   rating.innerHTML = `Rating: ${review.rating}`;
   rating.setAttribute('aria-label','rating');
-  article.appendChild(rating);
+  ratingDiv.appendChild(rating);
 
   const comments = document.createElement('p');
+  comments.className = 'comments';
   comments.innerHTML = review.comments;
   comments.setAttribute('aria-label','comment');
   article.appendChild(comments);

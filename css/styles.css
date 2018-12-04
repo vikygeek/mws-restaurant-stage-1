@@ -261,20 +261,46 @@ header h1 {
 #reviews-list li {
   background-color: #fff;
   border: 2px solid #f3f3f3;
+  border-top-left-radius: 25px;
+  border-bottom-right-radius: 25px;
   display: block;
   list-style-type: none;
   margin: 0 0 30px;
   overflow: hidden;
-  padding: 20px;
+  /* padding: 20px; */
   position: relative;
   width: 85%;
 }
-#reviews-list li p {
-  margin: 0 0 10px;
+#reviews-list .review-title {
+  background-color: #252831;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
 }
-#review-list li p:first-child {
+ #reviews-list .review-title p {
+  color: #ddd;
+  margin: 0px;
+  font-size: 1.2em;
+}
+#review-list .review-title .reviewer {
   font-weight: bold;
 }
+
+#reviews-list .ratings {
+  font-weight: bold;
+  background-color: #fff59d;
+  color: #252831;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0px;
+  display:inline-block;
+}
+ #reviews-list .rating, #reviews-list .comments {
+  font-size: 1.2em;
+  padding: 15px;
+  margin: 0px;
+ }
+
  #restaurant-hours {
   align-items: flex-start;
 }

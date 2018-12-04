@@ -18,7 +18,7 @@ Your project will be evaluated by a Udacity code reviewer according to the [Rest
 
 1. In this folder, start up a simple HTTP server to serve up the site files on your local computer. Python has some simple tools to do this, and you don't even need to know Python. For most people, it's already installed on your computer.
 
-    * Install Nade.js and npm. CLone the repo and go in to project directory. From terminal, type `npm install`. Once the packges are intalled, type `node index.js` to run the server.
+    * Install Node.js and npm. CLone the repo and go in to project directory. From terminal, type `npm install`. Once the packges are intalled, type `node index.js` to run the server.
 
 2. With your server running, visit the site: `http://localhost:8000`, and look around for a bit to see what the current experience looks like.
 3. Explore the provided code, and start making a plan to implement the required features in three areas: responsive design, accessibility and offline use.

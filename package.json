@@ -1,0 +1,22 @@
+{
+  "name": "mws-restaurant-stage-1",
+  "version": "1.0.0",
+  "description": "MWS Project 1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vikygeek/mws-restaurant-stage-1.git"
+  },
+  "author": "Vigneshwaran",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vikygeek/mws-restaurant-stage-1/issues"
+  },
+  "homepage": "https://github.com/vikygeek/mws-restaurant-stage-1#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

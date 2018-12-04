@@ -36,6 +36,7 @@ fillNeighborhoodsHTML = (neighborhoods = self.neighborhoods) => {
     const option = document.createElement('option');
     option.innerHTML = neighborhood;
     option.value = neighborhood;
+    option.label = neighborhood;
     select.append(option);
   });
 }
@@ -78,7 +79,7 @@ initMap = () => {
         scrollWheelZoom: false
       });
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-    mapboxToken: '<your MAPBOX API KEY HERE>',
+    mapboxToken: 'pk.eyJ1IjoiaW0tdmlnbmVzaCIsImEiOiJjam5zaW96M2owaHcyM3BwanJoeHF5MHo0In0.-Wxfe8IHwdjP27ookoZcag',
     maxZoom: 18,
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
       '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -157,28 +158,32 @@ fillRestaurantsHTML = (restaurants = self.restaurants) => {
  */
 createRestaurantHTML = (restaurant) => {
   const li = document.createElement('li');
+  const article = document.createElement('navigation');
+  article.setAttribute('role','article')
+  li.append(article);
 
   const image = document.createElement('img');
   image.className = 'restaurant-img';
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  li.append(image);
+  image.alt = restaurant.name;
+  article.append(image);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h3');
   name.innerHTML = restaurant.name;
-  li.append(name);
+  article.append(name);
 
   const neighborhood = document.createElement('p');
   neighborhood.innerHTML = restaurant.neighborhood;
-  li.append(neighborhood);
+  article.append(neighborhood);
 
   const address = document.createElement('p');
   address.innerHTML = restaurant.address;
-  li.append(address);
+  article.append(address);
 
   const more = document.createElement('a');
-  more.innerHTML = 'View Details';
+  more.innerHTML = 'View ' + restaurant.name;
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  article.append(more)
 
   return li
 }

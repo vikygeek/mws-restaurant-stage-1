@@ -22,7 +22,7 @@ initMap = () => {
         scrollWheelZoom: false
       });
       L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg70?access_token={mapboxToken}', {
-        mapboxToken: '<your MAPBOX API KEY HERE>',
+        mapboxToken: 'pk.eyJ1IjoiaW0tdmlnbmVzaCIsImEiOiJjam5zaW96M2owaHcyM3BwanJoeHF5MHo0In0.-Wxfe8IHwdjP27ookoZcag',
         maxZoom: 18,
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
           '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -81,9 +81,11 @@ fetchRestaurantFromURL = (callback) => {
  */
 fillRestaurantHTML = (restaurant = self.restaurant) => {
   const name = document.getElementById('restaurant-name');
+  name.setAttribute('aria-label','restaurant name');
   name.innerHTML = restaurant.name;
 
   const address = document.getElementById('restaurant-address');
+  address.setAttribute('aria-label','restaurant address');
   address.innerHTML = restaurant.address;
 
   const image = document.getElementById('restaurant-img');
@@ -91,6 +93,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
 
   const cuisine = document.getElementById('restaurant-cuisine');
+  cuisine.setAttribute('aria-label','cuisine type');
   cuisine.innerHTML = restaurant.cuisine_type;
 
   // fill operating hours
@@ -109,7 +112,7 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
   for (let key in operatingHours) {
     const row = document.createElement('tr');
 
-    const day = document.createElement('td');
+    const day = document.createElement('th');
     day.innerHTML = key;
     row.appendChild(day);
 
@@ -128,6 +131,7 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
   title.innerHTML = 'Reviews';
+  title.setAttribute('id','reviews-header');
   container.appendChild(title);
 
   if (!reviews) {
@@ -148,21 +152,45 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
+  li.setAttribute('tabindex','0');
+  
+  const article = document.createElement('article');
+
+  article.setAttribute('role','article');
+  article.setAttribute('aria-label','review by '+review.name);
+  li.append(article);
+
+  const reviewDiv = document.createElement('div');
+  reviewDiv.className = 'review-title';
+  article.appendChild(reviewDiv);
+
   const name = document.createElement('p');
   name.innerHTML = review.name;
-  li.appendChild(name);
+  name.className = 'reviewer';
+  article.setAttribute('aria-label','reviewer');
+  reviewDiv.appendChild(name);
 
   const date = document.createElement('p');
   date.innerHTML = review.date;
-  li.appendChild(date);
+  date.className = 'reviewDate';
+  date.setAttribute('aria-label','review date');
+  reviewDiv.appendChild(date);
+
+  const ratingDiv = document.createElement('div');
+  ratingDiv.className = 'rating';
+  article.appendChild(ratingDiv);
 
   const rating = document.createElement('p');
+  rating.className = 'ratings';
   rating.innerHTML = `Rating: ${review.rating}`;
-  li.appendChild(rating);
+  rating.setAttribute('aria-label','rating');
+  ratingDiv.appendChild(rating);
 
   const comments = document.createElement('p');
+  comments.className = 'comments';
   comments.innerHTML = review.comments;
-  li.appendChild(comments);
+  comments.setAttribute('aria-label','comment');
+  article.appendChild(comments);
 
   return li;
 }
@@ -173,7 +201,11 @@ createReviewHTML = (review) => {
 fillBreadcrumb = (restaurant=self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
   const li = document.createElement('li');
-  li.innerHTML = restaurant.name;
+  const link = document.createElement('a');
+  link.setAttribute('aria-current','page');
+  link.href = '#';
+  link.innerHTML = restaurant.name;
+  li.append(link);
   breadcrumb.appendChild(li);
 }
 
